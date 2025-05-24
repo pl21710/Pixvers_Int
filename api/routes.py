@@ -7,7 +7,7 @@ import os
 router = APIRouter()
 
 client = PixVerseClient(
-    api_key="sk-26eac1353e1ec9ddde1a42ed195e191f",  # <-- сюда вставь свой API-ключ
+    api_key="sk-26eac1353e1ec9ddde1a42ed195e191f", 
     app_bundle_id="com.example.app",
     apphud_user_id="example_user_id"
 )
@@ -19,7 +19,7 @@ def preprocess_image(input_path, output_path="processed.jpg"):
     """
     with Image.open(input_path) as img:
         img = img.convert("RGB")
-        img = img.resize((1024, 576))  # PixVerse требует фиксированный размер
+        img = img.resize((1024, 576)) 
         img.save(output_path, "JPEG", quality=95)
     return output_path
 
@@ -30,7 +30,6 @@ async def generate_image2video(
 ):
     print("🚀 Запрос получен")
 
-    # Сохраняем временный файл
     ext = os.path.splitext(image.filename)[-1]
     with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as tmp:
         tmp.write(await image.read())
